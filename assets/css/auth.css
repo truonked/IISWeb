@@ -1,0 +1,293 @@
+/* base reset + font setup đảm bảo layout consistent toàn bộ page */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, sans-serif;
+}
+
+/* body layout center card + background tối và particles layer */
+body{
+height:100vh;
+background:#252a3c;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+/* particles canvas fixed phía sau toàn bộ UI */
+#particlesCanvas{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+/* container giữ card ở center theo chiều ngang */
+.container{
+width:100%;
+display:flex;
+justify-content:center;
+}
+
+/* login card glass effect + shadow + transition height */
+.card{
+position:relative;
+width:420px;
+padding:40px;
+border-radius:25px;
+background:rgba(40,45,65,0.55);
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:0 25px 70px rgba(0,0,0,0.45);
+color:white;
+transition:height .35s cubic-bezier(.4,0,.2,1);
+}
+
+/* tiêu đề chính của hệ thống */
+.system-title{
+font-size:28px;
+font-weight:800;
+text-align:center;
+margin-bottom:22px;
+letter-spacing:0.2px;
+}
+
+.system-title span{
+display:block;
+}
+
+/* tab navigation switch giữa signin signup */
+.tabs{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-bottom:30px;
+}
+
+.tabs button{
+padding:10px 25px;
+border:none;
+border-radius:25px;
+background:rgba(255,255,255,0.15);
+color:white;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+
+.tabs button:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 18px rgba(0,0,0,0.4);
+}
+
+.tabs .active{
+background:#6c5ce7;
+}
+
+/* form visibility và animation control giữa hai form */
+.form{
+display:none;
+}
+
+.form.active{
+display:block;
+}
+
+/* input container dùng để position icon bên trong */
+.input-box{
+position:relative;
+margin-bottom:18px;
+}
+
+/* input style glass effect + focus highlight rõ ràng */
+.input-box input{
+width:100%;
+padding:15px 45px 15px 20px;
+border-radius:35px;
+border:1px solid rgba(255,255,255,0.35);
+background:rgba(20,25,40,0.55);
+color:#ffffff;
+font-weight:600;
+letter-spacing:0.3px;
+outline:none;
+transition:all .2s ease;
+}
+
+.input-box input::placeholder{
+color:rgba(255,255,255,0.65);
+font-weight:500;
+}
+
+.input-box input:focus{
+border:1px solid rgba(108,92,231,0.9);
+background:rgba(20,25,40,0.75);
+box-shadow:0 0 0 2px rgba(108,92,231,0.25);
+}
+
+/* password eye icons căn phải và center theo chiều dọc */
+#signinEyeOpen,#signinEyeClosed,
+#signupEyeOpen,#signupEyeClosed,
+#confirmEyeOpen,#confirmEyeClosed{
+position:absolute;
+right:18px;
+top:50%;
+transform:translateY(-50%);
+cursor:pointer;
+}
+
+#signinEyeClosed,
+#signupEyeClosed,
+#confirmEyeClosed{
+display:none;
+}
+
+/* date input container đảm bảo icon align chính xác */
+.input-box.date{
+position:relative;
+}
+
+/* padding phải để tránh icon đè lên text */
+.input-box.date input{
+padding-right:45px;
+}
+
+/* birthday icon căn giữa dọc giống eye icon */
+.birthday-icon{
+position:absolute;
+right:18px;
+top:50%;
+transform:translateY(-50%);
+pointer-events:none;
+opacity:.9;
+font-size:16px;
+line-height:1;
+}
+
+/* submit button full width với hover effect nhẹ */
+.submit{
+width:100%;
+padding:16px;
+border:none;
+border-radius:35px;
+background:#6c5ce7;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:all .25s cubic-bezier(.4,0,.2,1);
+}
+
+.submit:hover{
+transform:translateY(-3px);
+box-shadow:0 12px 24px rgba(108,92,231,0.45);
+}
+
+/* wrapper giữ animation slide giữa hai form */
+.forms-wrapper{
+position:relative;
+overflow:visible;
+height:auto;
+}
+
+.form{
+position:absolute;
+width:100%;
+top:0;
+left:0;
+opacity:0;
+transform:translateX(40px);
+transition:all .35s cubic-bezier(.4,0,.2,1);
+}
+
+.form.active{
+opacity:1;
+transform:translateX(0);
+position:relative;
+}
+
+.form.exit-left{
+transform:translateX(-40px);
+opacity:0;
+}
+
+/* khối text hỗ trợ thay cho social login để hợp ngữ cảnh hệ thống nội bộ */
+.support-box{
+margin-top:22px;
+padding:14px 16px;
+border-radius:16px;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.12);
+}
+
+.support-title{
+font-size:14px;
+font-weight:700;
+margin-bottom:6px;
+color:#ffffff;
+}
+
+.support-text{
+font-size:13px;
+line-height:1.5;
+color:rgba(255,255,255,0.78);
+}
+
+/* toast hiển thị feedback login signup với progress bar */
+#toast{
+display:none;
+position:fixed;
+top:20px;
+right:20px;
+width:260px;
+background:rgba(30,35,50,0.95);
+color:white;
+padding:15px 18px;
+border-radius:10px;
+font-weight:600;
+box-shadow:0 10px 26px rgba(0,0,0,0.4);
+overflow:hidden;
+align-items:center;
+gap:8px;
+}
+
+#toastBar{
+position:absolute;
+bottom:0;
+left:0;
+height:4px;
+width:100%;
+background:#6c5ce7;
+animation:toastProgress 2s linear forwards;
+}
+
+@keyframes toastProgress{
+from{width:100%;}
+to{width:0%;}
+}
+
+/* autofill fix tránh màu nền vàng xanh phá UI */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+-webkit-box-shadow:0 0 0 1000px rgba(20,25,40,0.55) inset !important;
+-webkit-text-fill-color:#ffffff !important;
+caret-color:#ffffff !important;
+background-clip:padding-box;
+transition:background-color 5000s ease-in-out 0s !important;
+cursor:text !important;
+}
+
+input:-moz-autofill{
+box-shadow:inset 0 0 0 30px rgba(20,25,40,0.55) !important;
+-moz-text-fill-color:#ffffff !important;
+caret-color:#ffffff !important;
+background-color:rgba(20,25,40,0.55) !important;
+background-clip:padding-box;
+}
